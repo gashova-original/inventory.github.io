@@ -1,0 +1,37 @@
+<!-- Modal -->
+<div class="modal" id="detail_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Редактирование</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id = 'detail_edition' method="POST" style='padding: 10px'>
+
+				<div class="modal-body">
+
+					<label for="ed_name"><small>Наименование:</small></label>
+					<input id='ed_name' class="form-control mb-2" name='name' placeholder = ''/>
+
+					<label for="ed_producer"><small>Производитель:</small></label>
+					<input id='ed_producer' class="form-control mb-2" name='producer' placeholder = 'Производитель'/>
+
+					<label for="ed_specifications"><small>Характеристики:</small></label>
+					<input id='ed_specifications' class="form-control mb-2" name='specifications' placeholder = 'Характеристики'/>
+
+					<label for="ed_comments"><small>Комментарии:</small></label>
+					<input id='ed_comments' class="form-control mb-3" name='comments' placeholder = 'Комментарии'/>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+					<button type="submit" class="btn btn-primary">Сохранить</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

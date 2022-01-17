@@ -1,0 +1,98 @@
+<%- include('../layout/header') %>
+<table class = 'table table-bordered'>
+	<thead class ='thead-dark'>
+	<tr>
+		<th scope = 'col'>Инвент. номер</th>
+		<th scope = 'col'>Оборудование</th>
+		<th scope = 'col'>Производитель</th>
+		<th scope = 'col'>Модель</th>
+		<th scope = 'col'>Расположение</th>
+		<th scope = 'col'>Дата осмотра</th>
+		<% if(auth) {%> <th scope = 'col'></th> <% } %>
+	</tr>
+	</thead>
+	<tbody>
+	<%
+	for(var i=0; i<rows.length; i++) {
+	%>
+	<tr>
+		<td><%=rows[i].number%></td>
+		<td><%=rows[i].hardware%></td>
+		<td><%=rows[i].producer%></td>
+		<td><%=rows[i].model%></td>
+		<td><%=rows[i].location%></td>
+		<td><%=rows[i].replaced%></td>
+		<% if(auth) {%>
+		<td>
+			<a type="button" data-toggle="modal" data-target="#edit_hardware">
+				<i class="fas fa-2x fa-edit  text-primary"></i>
+			</a>
+		</td>
+		<% } %>
+	</tr>
+	<%
+	}
+	%>
+	</tbody>
+</table>
+</br>
+<form method='POST' id='optional' action = '/<%=rows[0].number%>'>
+	<table class="table table-bordered">
+		<colgroup>
+			<col width='10%' />
+			<col width='*%' />
+			<col width='10%' />
+		</colgroup>
+		<thead>
+		<tr>
+			<td>Заметки</td>
+			<td>
+				<textarea name = 'characteristic' style='width:95%; height: 95%; margin: 5px'><%=rows[0].characteristic%></textarea>
+			</td>
+			<% if(auth) { %>
+				<th><button type='submit'>Сохранить</button></th>
+			<% } %>
+
+		</tr>
+		</thead>
+	</table>
+</form>
+</br>
+<%
+if(auth) {
+%>
+	<%- include ../forms/add_detail.ejs %>
+<%
+}
+%>
+
+<table class = 'table'>
+	<thead class ='thead-dark'>
+		<tr>
+			<th scope="col">Запчасть</th>
+			<th scope="col">Производитель</th>
+			<th scope="col">Характеристики</th>
+			<th scope="col">Комментарии</th>
+			<% if(auth) { %>
+			<th scope="col"></th>
+			<th scope="col"></th>
+			<% } %>
+		</tr>
+	</thead>
+	<tbody>
+		<% for(var i=0; i < details.length; i++) { %>
+		<tr>
+			<td><%=details[i].name%></td>
+			<td><%=details[i].producer%></td>
+			<td><%=details[i].specifications%></td>
+			<td><%=details[i].comments%></td>
+			<% if(auth) { %>
+				<td><a href='<%=rows[0].number%>/<%=details[i]._id%>/delete'>Удалить</a></td>
+				<td><button type="button" data-toggle="modal" data-target="#detail_edit"
+							class="btn btn-primary" id="<%=details[i]._id%>">Изменить</button></td>
+			<% } %>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+<%- include('../layout/footer') %>

@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div class="modal" id="edit_hardware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Изменить</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id = 'hardware_edition' action="/<%=rows[0].number%>" method="POST" style='padding: 10px'>
+				<div class="modal-body">
+					<input disabled id='he_name' class="form-control mb-2" name='number' value = '<%=rows[0].number%>'/>
+					<input id='he_name' class="form-control mb-2" name='hardware' placeholder = '<%=rows[0].hardware%>'/>
+					<input id='he_producer' class="form-control mb-2" name='producer' placeholder = '<%=rows[0].producer%>'/>
+					<input id='he_model' class="form-control mb-2" name='model' placeholder = '<%=rows[0].model%>'/>
+					<input id='he_location' class="form-control mb-3" name='location' placeholder = '<%=rows[0].location%>'/>
+					<input id='he_replaced' class="form-control mb-3" name='replaced' placeholder = '<%=rows[0].replaced%>'/>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+					<button type="submit" class="btn btn-primary">Сохранить</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<!-- Если пользователь не авторизован показать кнопку авторизации -->
+<% if(!auth) { %>
+	<div class="ml-auto mr-4">
+		<!-- Кнопка вызывающая всплывающее окно с формой models/auth.ejs -->
+		<a type="button" data-toggle="modal" data-target="#auth_modal">
+			<i class="fas fa-2x fa-sign-in-alt text-primary"></i>
+		</a>
+	</div>
+<% } %>

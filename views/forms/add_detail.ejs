@@ -1,0 +1,12 @@
+<!--
+	Форма добавление запчасти:
+ 	POST http://website/:number/status
+ 	body: { String name, String producer, String specifications, String comments }
+ -->
+<form class = 'form-inline' id = 'detail' action = '/<%=rows[0].number%>/status' method= 'POST' style='padding: 10px'>
+	<input class = 'form-control mr-1' name='name' placeholder = 'Наименование'/>
+	<input class = 'form-control mr-1' name='producer' placeholder = 'Производитель'/>
+	<input class = 'form-control mr-1' name='specifications' placeholder = 'Характеристики'/>
+	<input class = 'form-control mr-1' name='comments' placeholder = 'Комментарии'/>
+	<button class = 'btn btn-primary'type='submit'>Добавить</button>
+</form>

@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal" id="add_hardware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Создать</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id = 'hardware_addition' action="/" method="POST" style='padding: 10px'>
+
+				<div class="modal-body">
+
+					<input id='de_number' class="form-control" name='number' placeholder = 'Инвент. номер'/>
+					<div class="invalid-feedback">Инвентарный номер должен быть уникальным</div>
+					<input id='de_name' class="form-control mt-2" name='hardware' placeholder = 'Оборудование'/>
+					<input id='de_producer' class="form-control mt-2" name='producer' placeholder = 'Производитель'/>
+					<input id='de_model' class="form-control mt-2" name='model' placeholder = 'Модель'/>
+					<input id='de_location' class="form-control mt-2" name='location' placeholder = 'Расположние'/>
+					<input id='de_replaced' class="form-control mt-2" name='replaced' placeholder = 'Дата осмотра'/>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+					<button type="submit" class="btn btn-primary">Добавить</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

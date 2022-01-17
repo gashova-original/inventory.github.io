@@ -1,0 +1,117 @@
+			<script type="text/javascript">
+				$(document).ready(function() {
+					/* События нажатие кнопки войти из models/auth.ejs */
+					$('#auth_form').submit(function (e) {
+
+						e.preventDefault(); // avoid to execute the actual submit of the form.
+						var form = $(this); // форма models/auth.ejs
+						var url = form.attr('action'); // инициализация атрибута (action) формы
+
+						$.ajax({
+							type: "POST", // Тип запроса
+							url: url, // Адрес
+							data: form.serialize(), // сериализация формы.
+							timeout: 5000,
+							error: function(jqXHR, textStatus, errorThrown) {
+								$('#auth-key').addClass('is-invalid') // Немного анимации
+								setTimeout(function(){ $('#auth-key').removeClass('is-invalid') }, 3000);
+								return false;
+							},
+							success: function (data) {
+								location.reload(); // Обновляем страницу
+								return true;
+							},
+						});
+					})
+					/* События при отправки запроса на создание оборудование */
+					$('#hardware_addition').submit(function (e) {
+
+						e.preventDefault(); // avoid to execute the actual submit of the form.
+						var form = $(this); // форма models/auth.ejs
+						var url = form.attr('action'); // инициализация атрибута (action) формы
+
+						$.ajax({
+							type: "POST", // Тип запроса
+							url: url, // Адрес
+							data: form.serialize(), // сериализация формы.
+							timeout: 5000,
+							error: function(jqXHR, textStatus, errorThrown) {
+								if(parseInt(jqXHR.status) === 409) {
+									$('#de_number').addClass('is-invalid')
+									setTimeout(function() { // Немного анимации
+										$('#de_number').removeClass('is-invalid')
+									}, 3000);
+								}
+								return false;
+							},
+							success: function (data) {
+								$('#add_hardware').modal('toggle');
+								location.reload();
+							},
+						});
+					})
+					/* События всплыва окна модели models/detail_edit.js */
+					$('#detail_edit').on('shown.bs.modal', function (event) {
+
+						<% if (!locals.details) details = [] %> // Если нет детали установим пустой
+						let details = [<%-JSON.stringify(details)%>] // десериализация данных
+						details = details[0]
+
+						<%
+						if (locals.rows === []) rows = []
+						rows.push({number: "none"})
+						%>
+
+						let num = <%-rows[0].number%> // Инв. номер оборудование
+						if(num === 'none') return true;
+
+						/* Отбираем нужную нам запчасть */
+						details = details.filter(function (detail) { return detail._id === event.relatedTarget.id })
+						if(details.length === 0) return true; // Если не существует прерываем функцию
+
+						/* Вставляем в форму add_detail.ejs текущие данные детали */
+						$('#ed_name').attr('placeholder', details[0].name).attr('value', details[0].name)
+						$('#ed_producer').attr('placeholder', details[0].producer).attr('value', details[0].producer)
+						$('#ed_specifications').attr('placeholder', details[0].specifications).attr('value', details[0].specifications)
+						$('#ed_comments').attr('placeholder', details[0].comments).attr('value', details[0].comments)
+						$('#detail_edition').attr('action', "/" + num + "/" + details[0]._id)
+						$('#detail_edit').modal('show')
+					})
+
+					$('#detail').on('submit', function(){
+						location.reload(); //
+					});
+
+					//Change pos/background/padding/add shadow on nav when scroll event happens
+					// Скопированная анимация закрепляющая навигационную вверхнуюю панель
+					// после прокрутки страницы + кнопка - вверх, в левой нижней части
+
+					$(function(){
+						var navbar = $('.navbar');
+                        var scrollUp = $('.scroll-up-button');
+                        if($(window).scrollTop() <= 40) { scrollUp.hide(); }
+                        else { scrollUp.fadeIn().show(); }
+
+						$(window).scroll(function() {
+							if($(window).scrollTop() <= 40){
+								navbar.removeClass('navbar-scroll');
+                                scrollUp.fadeOut(function () {
+                                  scrollUp.hide();
+                                });
+							} else {
+								navbar.addClass('navbar-scroll');
+                                scrollUp.fadeIn().show();
+							}
+						});
+					});
+
+				})
+			</script>
+			<!-- Добавляем все имеющеся модели всплывающих окон-->
+			<%- include('../models/detail_edit.ejs') %>
+			<%- include('../models/add_hardware.ejs') %>
+			<%- include('../models/edit_hardware.ejs') %>
+			<%- include('../models/auth.ejs') %>
+		</div>
+	</body>
+</html>

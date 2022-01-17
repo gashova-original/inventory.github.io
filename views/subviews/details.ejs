@@ -1,0 +1,46 @@
+<!-- Основной шаблон для выведение списка с запчастями -->
+
+<!-- Включаем основной шаблон заголовка -->
+<%- include('../layout/header') %>
+
+<%
+if(auth) {
+%>
+	<!-- Если пользователь авторизован сгенерировать форму добавление детали-->
+	<%- include ../forms/add_detail.ejs %>
+<%
+}
+%>
+
+<table class = 'table table-striped tableFixHead'>
+	<thead class ='thead-dark'>
+		<tr>
+			<th scope="col">Запчасть</th>
+			<th scope="col">Производитель</th>
+			<th scope="col">Характеристики</th>
+			<th scope="col">Комментарии</th>
+			<% if(auth) { %> <!-- Если пользователь авторизован добавляем колонку "Редактировать" -->
+				<th scope="col"></th>
+			<% } %>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- Перебираем все запчасти -->
+		<% for(var i=0; i < details.length; i++) { %>
+		<tr> <!-- Добавляем строку в таблице -->
+			<!-- Вставляем данные по колонкам -->
+			<td><%=details[i].name%></td>
+			<td><%=details[i].producer%></td>
+			<td><%=details[i].specifications%></td>
+			<td><%=details[i].comments%></td>
+			<% if(auth) { %>
+			<td><button type="button" data-toggle="modal" data-target="#detail_edit"
+						class="btn btn-primary" id="<%=details[i]._id%>">Изменить</button></td>
+			<% } %>
+		</tr>
+	<% } %>
+	</tbody>
+</table>
+
+<!-- Включаем основной шаблон подвала -->
+<%- include('../layout/footer') %>

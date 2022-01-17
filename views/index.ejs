@@ -1,0 +1,36 @@
+<%- include('layout/header') %>
+
+<table class = 'table table-striped tableFixHead'>
+	<thead class ='thead-dark'>
+		<tr>
+			<th scope="col">No.</th>
+			<th scope="col">Инвент. номер</th>
+			<th scope="col">Оборудование</th>
+			<th scope="col">Производитель</th>
+			<th scope="col">Модель</th>
+			<th scope="col">Расположение</th>
+			<th scope="col">Осмотрено</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%
+		for(var i=0; i<rows.length; i++) {
+		%>
+		<tr>
+			<td><%=i+1%></td>
+			<td><%=rows[i].number%></td>
+			<td><%=rows[i].hardware%></td>
+			<td><%=rows[i].producer%></td>
+			<td><%=rows[i].model%></td>
+			<td><%=rows[i].location%></td>
+			<td><%=rows[i].replaced%></td>
+			<td><a href = "../<%=rows[i].number%>">Cостояние</a></td>
+		</tr>
+		<%
+		}
+		%>
+	</tbody>
+</table>
+
+<%- include('layout/footer') %>

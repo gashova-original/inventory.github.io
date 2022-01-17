@@ -1,0 +1,17 @@
+<!-- Если параметр auth == истина -->
+<%if (auth) { %>
+	<div class="ml-4">
+		<!-- Кнопка вызывающая всплывающее окно с формой add_hardware.ejs -->
+		<a type="button" data-toggle="modal" data-target="#add_hardware">
+			<i class="fas fa-2x fa-plus-circle text-primary"></i>
+		</a>
+	</div>
+	<% if (rows.length === 1) { %>
+		<div class="ml-auto mr-4">
+			<!-- Ссылка на страницу удаление оборудование -->
+			<a href = "./<%=rows[0].number%>/delete">
+				<i class="fas fa-trash text-danger" style="font-size:25px;"></i>
+			</a>
+		</div>
+	<% } %>
+<% } %>
